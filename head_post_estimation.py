@@ -25,7 +25,8 @@ my_head_pose_estimator.load_yaw_variables(os.path.realpath("../deepgaze/etc/tens
 angle_dict = {}
 
 for file_name in tqdm.tqdm(Path(ARGS.input_dir).glob('**/*')):
-    if file_name.suffix != '.png' and file_name.suffix != '.jpg':
+    suffix = file_name.suffix.lower()
+    if suffix != '.png' and suffix != '.jpg' and suffix != '.jpeg':
         continue
     image = cv2.imread(str(file_name)) #Read the image with OpenCV
     # Get the angles for roll, pitch and yaw
