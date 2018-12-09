@@ -10,7 +10,7 @@ import argparse
 import tqdm
 
 PARSER = argparse.ArgumentParser(description='Search picture with the most similar angle')
-PARSER.add_argument('-i', '--input', required=True, dest='input_dir',
+PARSER.add_argument('-f', '--folder', required=True, dest='folder',
                     help='text input to search for')
 ARGS = PARSER.parse_args()
 
@@ -24,7 +24,7 @@ my_head_pose_estimator.load_yaw_variables(os.path.realpath("../deepgaze/etc/tens
 
 angle_dict = {}
 
-for file_name in tqdm.tqdm(Path(ARGS.input_dir).glob('**/*')):
+for file_name in tqdm.tqdm(Path(ARGS.folder).glob('**/*')):
     suffix = file_name.suffix.lower()
     if suffix != '.png' and suffix != '.jpg' and suffix != '.jpeg':
         continue
@@ -35,4 +35,4 @@ for file_name in tqdm.tqdm(Path(ARGS.input_dir).glob('**/*')):
     yaw = my_head_pose_estimator.return_yaw(image)  # Evaluate the yaw angle using a CNN
     angle_dict[str(file_name)] = [float(roll[0,0,0]), float(pitch[0,0,0]), float(yaw[0,0,0])]
 
-json.dump(angle_dict, open(str(ARGS.input_dir) + '.json', 'w'))
+json.dump(angle_dict, open(str(ARGS.folder) + '.json', 'w'))
