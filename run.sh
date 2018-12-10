@@ -27,10 +27,6 @@ case $a in
     model="${a#*=}"
     shift # past argument=value
     ;;
-    -f=*|--folder=*)
-    folder="${a#*=}"
-    shift # past argument=value
-    ;;
     -tra=*|--tradition=*)
     tradition="${a#*=}"
     shift # past argument=value
@@ -46,17 +42,17 @@ esac
 done
 echo "input=${input}"
 echo "extract_output=${extract_output}"
+echo "convert_output=${convert_output}"
+echo "model=${model}"
+echo "tradition=${tradition}"
 echo "src=${src}"
 echo "dst=${dst}"
-echo "model=${model}"
-echo "folder=${folder}"
-echo "tradition=${tradition}"
 
 
-python3 faceswap.py extract -i ${input} -o ${extract_output} -m ${model}
-python3 faceswap.py convert -i ${input} -o ${convert_output} -m ${model}
-if [ $tradition -eq 1 ]
+# python3 Deepfakes-faceswap/faceswap.py extract -i ${input} -o ${extract_output}
+# python3 Deepfakes-faceswap/faceswap.py convert -i ${input} -o ${convert_output} -m ${model}
+if [ "$tradition" = true ]
 then
     python3 head_post_estimation.py -f ${dst}
-    python main.py --src ${from} --dst ${dst} --out ${convert_output} --correct_color
+    # python FaceSwap/main.py --src ${from} --dst ${dst} --out ${convert_output} --correct_color
 fi
