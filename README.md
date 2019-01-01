@@ -24,7 +24,7 @@ Read README of [Deepfakes-faceswap](https://github.com/ModelIncubator/Deepfakes-
 	1. Only use original FaceSwap:
 		
 		```bash
-		run.sh -i=fixtures/normal_girl -eo=fixtures/normal_girl_extract/ -co=fixtures/normal_girl_output/  -m=/srv/model -tra=false
+		./run.sh -i=fixtures/normal_girl -eo=fixtures/normal_girl_extract/ -co=fixtures/normal_girl_output/  -m=/srv/model -tra=false
 		```
 	2. Use Traditional FaceSwap:
 

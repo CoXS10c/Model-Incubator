@@ -31,6 +31,10 @@ case $a in
     tradition="${a#*=}"
     shift # past argument=value
     ;;
+    -hp=*|--headpose=*)
+    headpose="${a#*=}"
+    shift # past argument=value
+    ;;
     --default)
     DEFAULT=YES
     shift # past argument with no value
@@ -47,12 +51,13 @@ echo "model=${model}"
 echo "tradition=${tradition}"
 echo "src=${src}"
 echo "dst=${dst}"
+echo "headpose=${headpose}"
 
 
-# python3 Deepfakes-faceswap/faceswap.py extract -i ${input} -o ${extract_output}
-# python3 Deepfakes-faceswap/faceswap.py convert -i ${input} -o ${convert_output} -m ${model}
+python3 Deepfakes-faceswap/faceswap.py extract -i ${input} -o ${extract_output}
+python3 Deepfakes-faceswap/faceswap.py convert -i ${input} -o ${convert_output} -m ${model}
 if [ "$tradition" = true ]
 then
-    python3 head_post_estimation.py -f ${dst}
-    # python FaceSwap/main.py --src ${from} --dst ${dst} --out ${convert_output} --correct_color
+    python3 head_post_estimation.py -f ${headpose} -i ${extract_output}/5_0.jpg
+    # python FaceSwap/main.py --src ${from} --dst ${dst} --out ${convert_output} --correct_color --no_debug_window
 fi
