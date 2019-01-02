@@ -7,22 +7,6 @@ case $a in
     input="${a#*=}"
     shift # past argument=value
     ;;
-    -eo=*|--extout=*)
-    extract_output="${a#*=}"
-    shift # past argument=value
-    ;;
-    -co=*|--convout=*)
-    convert_output="${a#*=}"
-    shift # past argument=value
-    ;;
-    -s=*|--src=*)
-    src="${a#*=}"
-    shift # past argument=value
-    ;;
-    -d=*|--dst=*)
-    dst="${a#*=}"
-    shift # past argument=value
-    ;;
     -m=*|--model=*)
     model="${a#*=}"
     shift # past argument=value
@@ -45,19 +29,14 @@ case $a in
 esac
 done
 echo "input=${input}"
-echo "extract_output=${extract_output}"
-echo "convert_output=${convert_output}"
 echo "model=${model}"
 echo "tradition=${tradition}"
-echo "src=${src}"
-echo "dst=${dst}"
 echo "headpose=${headpose}"
 
 
-python3 Deepfakes-faceswap/faceswap.py extract -i ${input} -o ${extract_output}
-python3 Deepfakes-faceswap/faceswap.py convert -i ${input} -o ${convert_output} -m ${model}
+python3 Deepfakes-faceswap/faceswap.py extract -i ${input} -o ${input}_extract
+python3 Deepfakes-faceswap/faceswap.py convert -i ${input} -o ${input}_output -m ${model}
 if [ "$tradition" = true ]
 then
-    python3 head_post_estimation.py -f ${headpose} -i ${extract_output}/5_0.jpg
-    # python FaceSwap/main.py --src ${from} --dst ${dst} --out ${convert_output} --correct_color --no_debug_window
+    python3 main.py -f ${headpose} -i ${input} --correct_color --no_debug_window
 fi
