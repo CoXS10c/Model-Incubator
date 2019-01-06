@@ -204,4 +204,5 @@ if __name__ == "__main__":
                          '{}/{}/{}.jpg'.format(ARGS.imgfolder+'_cv', str(convert_img).split('/')[-1], str(index)))
             except Exception as e:
                 print("=========== {} =============".format(e))
-                print("should be fixed")
+                print("{} should be fixed".format(
+                    str(convert_img).split('/')[-1]))

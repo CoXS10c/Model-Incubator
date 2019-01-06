@@ -20,21 +20,30 @@ Read README of [Deepfakes-faceswap](https://github.com/ModelIncubator/Deepfakes-
 ## Run
 
 
-1. Integrated CMD:
-	1. Only use original FaceSwap:
-		
-		```bash
-		./run.sh -i=fixtures/normal_girl -m=/srv/model -tra=false
-		```
-	2. Use Traditional FaceSwap:
+1. Preprocessing:
+	```bash
+	./preprocess.sh -i=<e.q. 美女寫真訓練資料.tar.gz>
+	```
+2. Training:
+	```
+	not complete
+	```
+3. FaceSwap:
+	1. Integrated CMD:
+		1. Only use original FaceSwap:
+			
+			```bash
+			./run.sh -i=fixtures/normal_girl -m=/srv/model -tra=false
+			```
+		2. Use Traditional FaceSwap:
 
-		```bash
-		./run.sh -i=fixtures/normal_girl -m=/srv/model -tra=true -hp=金惠美_extract
-		```
-2. Isolated CMD:
-	1. Extract the face alignment of normal female that you want to convert using [Deepfakes-faceswap](https://github.com/ModelIncubator/Deepfakes-faceswap): `python3 faceswap.py extract -i <input> -o <output> -m <model>`
-	2. Convert normal female to extrodinary female using [Deepfakes-faceswap](https://github.com/ModelIncubator/Deepfakes-faceswap): `python3 faceswap.py convert -i <input> -o <output> -m <model>`
-	3. Select the picture with the most similar angle among beautiful girls using [Deepgaze](https://github.com/ModelIncubator/deepgaze): `python3 `
-	4. Use [Traditional FaceSwap](https://github.com/ModelIncubator/FaceSwap) to get higher resolution: `python main.py --src <from> --dst <to> --out <output> --correct_color`
+			```bash
+			./run.sh -i=fixtures/normal_girl -m=/srv/model -tra=true -hp=金惠美_extract
+			```
+	2. Isolated CMD:
+		1. Extract the face alignment of normal female that you want to convert using [Deepfakes-faceswap](https://github.com/ModelIncubator/Deepfakes-faceswap): `python3 faceswap.py extract -i <input> -o <output> -m <model>`
+		2. Convert normal female to extrodinary female using [Deepfakes-faceswap](https://github.com/ModelIncubator/Deepfakes-faceswap): `python3 faceswap.py convert -i <input> -o <output> -m <model>`
+		3. Select the picture with the most similar angle among beautiful girls using [Deepgaze](https://github.com/ModelIncubator/deepgaze): `python3 `
+		4. Use [Traditional FaceSwap](https://github.com/ModelIncubator/FaceSwap) to get higher resolution: `python main.py --src <from> --dst <to> --out <output> --correct_color`
 
 ## Demo
