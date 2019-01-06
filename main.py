@@ -80,7 +80,6 @@ if __name__ == "__main__":
                                         float(pitch[0, 0, 0]), float(yaw[0, 0, 0])]
             most_similar[str(file_name)] = cosineDS(
                 angle_dict[str(file_name)], image_angel)
-
         return sorted(most_similar.items(), key=lambda x: x[1])[:10]
 
 
@@ -198,10 +197,11 @@ if __name__ == "__main__":
 
             cv2.destroyAllWindows()
 
-    print("=======", ARGS.imgfolder, ARGS.folder)
     for extract_img, convert_img in zip(Path(ARGS.imgfolder + '_extract').glob("*.jpg"), Path(ARGS.imgfolder + '_output').glob("*.jpg")):
-        for index, (src_img, _) in enumerate(find_similar_img(str
-                                                         (extract_img))):
-            print(src_img, str(convert_img), ARGS.imgfolder)
-            faceswap(src_img, str(convert_img),
-                     '{}/{}.jpg'.format(ARGS.imgfolder+'_cv', str(index)))
+        for index, (src_img, _) in enumerate(find_similar_img(str(extract_img))):
+            try:
+                faceswap(src_img, str(convert_img),
+                         '{}/{}/{}.jpg'.format(ARGS.imgfolder+'_cv', str(convert_img).split('/')[-1], str(index)))
+            except Exception as e:
+                print("=========== {} =============".format(e))
+                print("should be fixed")
