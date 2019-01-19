@@ -51,8 +51,8 @@ def find_similar_img(img, topk=100):
 
     # can only find similar picture using extracted img (64 * 64)
     # but we need origin img which has higer resolution
-    origin_img_size_folder, extracted_img_size_folder = Path(ARGS.folder + '_squash'), Path(ARGS.folder + '_extract')
-    for extracted_file_path in tqdm.tqdm(extracted_img_size_folder.glob('**/*')):
+    origin_img_size_folder, extracted_img_size_folder = Path(ARGS.folder + '_preprocess'), Path(ARGS.folder + '_extract')
+    for extracted_file_path in tqdm.tqdm(extracted_img_size_folder.glob('*_0.jpg')):
         suffix = extracted_file_path.suffix.lower()
         if suffix != '.png' and suffix != '.jpg' and suffix != '.jpeg':
             continue
@@ -70,7 +70,7 @@ def find_similar_img(img, topk=100):
             angle_dict[extracted_file_path], image_angel)
 
     result = sorted(most_similar.items(), key=lambda x: x[1])[:topk]
-    return [origin_img_size_folder / img_path.name for img_path, cosine_distance in result]
+    return [str(origin_img_size_folder / img_path.name.replace('_0.jpg', '.jpg')) for img_path, cosine_distance in result]
 
 def _select_face(im, r=10):
     faces = face_detection(im)
@@ -206,13 +206,5 @@ if __name__ == "__main__":
     # not we would used to swap their face into other's face
     for extract_img, convert_img in zip(Path(ARGS.imgfolder + '_extract').glob("*.jpg"), Path(ARGS.imgfolder + '_output').glob("*.jpg")):
         for index, origin_size_similar_img in enumerate(find_similar_img(str(extract_img))):
-            print('----------------')
-            print(origin_size_similar_img)
-            print('----------------')
-            try:
-                faceswap(origin_size_similar_img, str(convert_img),
-                         '{}/{}/{}.jpg'.format(ARGS.imgfolder+'_cv', str(convert_img).split('/')[-1], str(index)))
-            except Exception as e:
-                print("=========== {} =============".format(e))
-                print("{} should be fixed".format(
-                    str(convert_img).split('/')[-1]))
+            faceswap(origin_size_similar_img, str(convert_img),
+                        '{}/{}/{}.jpg'.format(ARGS.imgfolder+'_cv', str(convert_img).split('/')[-1], str(index)))
