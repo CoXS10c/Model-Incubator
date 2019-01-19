@@ -21,7 +21,7 @@ from FaceSwap.face_swap import (apply_mask, correct_colours, mask_from_points,
 from scipy.spatial.distance import cosine as cosineDS
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
-def find_similar_img(img, topk=100):
+def find_similar_img(img, topk=20):
     sess = tf.Session()  # Launch the graph in a session.
     my_head_pose_estimator = CnnHeadPoseEstimator(
         sess)  # Head pose estimation object
@@ -68,7 +68,7 @@ def find_similar_img(img, topk=100):
                                         float(pitch[0, 0, 0]), float(yaw[0, 0, 0])]
         most_similar[extracted_file_path] = cosineDS(
             angle_dict[extracted_file_path], image_angel)
-
+    print('Finish calculating {}\'s most similari pic'.format(img))
     result = sorted(most_similar.items(), key=lambda x: x[1])[:topk]
     return [str(origin_img_size_folder / img_path.name.replace('_0.jpg', '.jpg')) for img_path, cosine_distance in result]
 
