@@ -19,6 +19,10 @@ case $a in
     headpose="${a#*=}"
     shift # past argument=value
     ;;
+    -ex=*|--extract=*)
+    extract="${a#*=}"
+    shift # past argument=value
+    ;;
     --default)
     DEFAULT=YES
     shift # past argument with no value
@@ -35,7 +39,10 @@ echo "headpose=${headpose}"
 
 
 python3 Deepfakes-faceswap/faceswap.py extract -i ${input} -o ${input}_extract
-python3 Deepfakes-faceswap/faceswap.py extract -i ${headpose}_preprocess -o ${headpose}_extract
+if [ "$extract" = true ]
+then
+    python3 Deepfakes-faceswap/faceswap.py extract -i ${headpose}_preprocess -o ${headpose}_extract
+fi
 python3 Deepfakes-faceswap/faceswap.py convert -i ${input} -o ${input}_output -m ${model}
 if [ "$tradition" = true ]
 then
