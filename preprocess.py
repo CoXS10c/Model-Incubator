@@ -18,6 +18,8 @@ from pathlib import Path
 
 import tqdm
 
+import cv2
+
 PARSER = argparse.ArgumentParser(
     description='Search picture with the most similar angle')
 PARSER.add_argument('-i', '--inputdir', dest='imgfolder', required=True, help='the directory contains images')
@@ -33,6 +35,11 @@ for directory in Path(IMGFOLER_NAME).iterdir():
         print(PREPROC_FOLDER)
         PREPROC_FOLDER.mkdir(exist_ok=True)
         for index, filepath in tqdm.tqdm(enumerate(directory.glob('**/*.*'))):
+            try:
+                cv2.imread(str(filepath)).shape
+            except Exception:
+                # print("not image")
+                continue
             suffix = filepath.suffix
             if suffix.lower() == '.jpg' or suffix.lower() == '.jpeg':
                 suffix = '.jpg'

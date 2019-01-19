@@ -35,6 +35,7 @@ echo "headpose=${headpose}"
 
 
 python3 Deepfakes-faceswap/faceswap.py extract -i ${input} -o ${input}_extract
+python3 Deepfakes-faceswap/faceswap.py extract -i ${headpose}_preprocess -o ${headpose}_extract
 python3 Deepfakes-faceswap/faceswap.py convert -i ${input} -o ${input}_output -m ${model}
 if [ "$tradition" = true ]
 then
