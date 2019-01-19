@@ -19,16 +19,16 @@ Read README of [Deepfakes-faceswap](https://github.com/ModelIncubator/Deepfakes-
 
 ## Run
 
-
-1. Preprocessing:
+1. Download Training Data: [link](https://drive.google.com/open?id=1aTbHp0wqmNEfAUO5dN8aYrYfXTBP3AvM)
+2. Preprocessing:
 	```bash
 	./preprocess.sh -i=<e.q. 美女寫真訓練資料.tar.gz>
 	```
-2. Training:
+3. Training:
 	```
 	not complete
 	```
-3. FaceSwap:
+4. FaceSwap:
 	1. Integrated CMD:
 		1. Only use original FaceSwap:
 			
@@ -46,3 +46,7 @@ Read README of [Deepfakes-faceswap](https://github.com/ModelIncubator/Deepfakes-
 		4. Use [Traditional FaceSwap](https://github.com/ModelIncubator/FaceSwap) to get higher resolution: `python main.py --src <from> --dst <to> --out <output> --correct_color`
 
 ## Demo
+
+| Source | Deepfakes | opencv |
+| --- | --- | --- |
+|![](fixtures/normal_girl/5.jpg) | ![](docs/deepfake.jpg) | ![](docs/opencv.jpg) |
