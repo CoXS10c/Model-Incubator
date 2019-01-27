@@ -10,8 +10,8 @@
 
 ## Install
 
-1. `pip3 install pipenv`
-2. `pipenv install`
+1. `docker build -t modelincubator .`
+2. `nvidia-docker run -itd --name modelincubator -p 6006:6006 -p 8888:8888 modelincubator`
 
 ## Train (optional)
 
@@ -33,11 +33,12 @@ Read README of [Deepfakes-faceswap](https://github.com/ModelIncubator/Deepfakes-
 		1. Only use original FaceSwap:
 			
 			```bash
-			./run.sh -i=fixtures/normal_girl -m=/srv/model -tra=false			```
+			./run.sh -i=fixtures/normal_girl -m=/notebooks/Deepfakes-faceswap/model -tra=false
+			```
 		2. Use Traditional FaceSwap:
 
 			```bash
-			./run.sh -i=fixtures/normal_girl -m=/srv/model -tra=true -hp=金惠美
+			./run.sh -i=fixtures/normal_girl -m=/notebooks/Deepfakes-faceswap/model -tra=true -hp=金惠美./run.sh -i=fixtures/normal_girl -m=/srv/model -tra=true -hp=嚴智恩 -ex=false
 			```
 	2. Isolated CMD:
 		1. Extract the face alignment of normal female that you want to convert using [Deepfakes-faceswap](https://github.com/ModelIncubator/Deepfakes-faceswap): `python3 faceswap.py extract -i <input> -o <output> -m <model>`
