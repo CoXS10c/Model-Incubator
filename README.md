@@ -52,5 +52,5 @@ Read README of [Deepfakes-faceswap](https://github.com/ModelIncubator/Deepfakes-
 | --- | --- | --- |
 |![](fixtures/normal_girl/5.jpg) | ![](docs/deepfake.jpg) | ![](docs/opencv.jpg) |
 
-![600](600.jpg)
-![900](900.jpg)
+![600](docs/600.jpg)
+![900](docs/900.jpg)
