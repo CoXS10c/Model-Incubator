@@ -38,7 +38,11 @@ Read README of [Deepfakes-faceswap](https://github.com/ModelIncubator/Deepfakes-
 		2. Use Traditional FaceSwap:
 
 			```bash
-			./run.sh -i=fixtures/normal_girl -m=/notebooks/Deepfakes-faceswap/model -tra=true -hp=金惠美./run.sh -i=fixtures/normal_girl -m=/srv/model -tra=true -hp=嚴智恩 -ex=false
+			./run.sh -i=fixtures/normal_girl -m=/notebooks/Deepfakes-faceswap/model -tra=true -hp=金惠美 -ex=false
+			```
+
+			```bash
+			./run.sh -i=fixtures/normal_girl -m=/srv/model -tra=true -hp=嚴智恩 -ex=false
 			```
 	2. Isolated CMD:
 		1. Extract the face alignment of normal female that you want to convert using [Deepfakes-faceswap](https://github.com/ModelIncubator/Deepfakes-faceswap): `python3 faceswap.py extract -i <input> -o <output> -m <model>`
