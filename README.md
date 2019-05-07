@@ -1,5 +1,9 @@
 # Model Incubator
 
+## License
+
+MIT
+
 ## Prerequisite
 
 1. You need to install python3: `brew install python3.6 git`
